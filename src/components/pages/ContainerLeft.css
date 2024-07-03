@@ -1,0 +1,58 @@
+.logincontainer{
+    
+    border-style: solid;
+    border: 0.9px solid #ccc;
+    border-radius: 20px;
+    width: 20rem;
+    height: max-content;
+    top: 0px;
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+    
+    align-self: center;
+}
+.logincontainer button{
+    margin-top: 10px;
+}
+.logincontainer h2{
+    text-align: left;
+    margin: 0px;
+    margin-bottom: 1rem;
+}
+.logincontainer p {
+    justify-self: end;
+    font-weight: 600;
+    
+}
+.check{
+    display: flex;
+    margin-top: 1rem;
+}
+.check label{
+    font-size: 10px;
+    
+}
+.check a{
+    text-decoration:  underline;
+}
+
+.container { 
+    flex: 1;
+    display: flex;
+    width: max-content;
+    flex-direction: column;
+    justify-content: center;
+ 
+}
+.inputtextcontainer{
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+
+}
+.thirdpartysigninbox{
+    display: flex;
+    justify-content: space-between;
+}
+

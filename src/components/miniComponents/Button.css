@@ -1,0 +1,29 @@
+.ButtonX{
+    border: 0px;
+    background-color: #3A5B22;
+    color: aliceblue;
+    font-weight: 800;
+    border-radius: 20px;
+    padding: 5px;
+
+}
+.ButtonX:hover{
+    
+}
+.ButtonX:focus{
+    
+}
+.ButtonX{
+    
+}
+.iconButton{
+    border-radius: 3px;
+    border: 1px solid rgb(243, 220, 220);
+    background: transparent;
+    margin: 2px;
+    
+}
+.iconButton:hover{
+    border: 1px 1px rgb(240, 214, 214);
+    
+}

@@ -1,0 +1,16 @@
+.InputX{
+  border-radius: 10px;
+  padding: 7px;
+  color:#2c2a2a;
+  outline: none;
+  border: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border: 0.9px solid #ccc;
+ 
+  
+}
+.InputX::placeholder{
+  color: #ccc;
+  font-size: 10px;
+}
