@@ -1,0 +1,57 @@
+.HeaderContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    margin: 10px;
+    border-radius: 200px;
+    border: 1px solid rgb(236, 236, 131);
+    padding: 0px;
+    height: 40px;
+}
+
+.HeaderContainer h2 {
+    justify-self: flex-start;
+    margin: 0;
+    padding-left: 10px; /* Optional: for some spacing between the border and text */
+}
+
+.HeaderContainer .iconHolder {
+    margin-left: auto;
+    display: flex; /* Optional: if you want to align items inside the iconHolder */
+    align-items: center; /* Optional: to vertically center items inside the iconHolder */
+    padding-right: 10px; /* Optional: for some spacing between the border and icons */
+}
+.HeaderContainer .searchholder{
+    margin: 0 auto;
+    display: flex;
+    flex-grow: 2;
+    justify-content: center;
+}
+
+
+.name .dropdownC{
+    position: absolute;
+    width: 200px;
+    background-color: aqua;
+    margin: 10px 0px;
+    display: flex;
+    right: 100px;
+    margin-top: 30px;
+    flex-direction: column;
+    transition: display 1s;
+    
+}
+.name .dropdownC:hover{
+    
+}
+
+.name h2{
+    transition: color 0.2s;
+  
+
+}
+.name h2:hover{
+    color: aqua;
+}

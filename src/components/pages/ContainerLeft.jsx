@@ -8,16 +8,26 @@ import { FaXTwitter } from 'react-icons/fa6'
 import { BiLogoReddit } from 'react-icons/bi'
 
 function ContainerLeft() {
-  const inputref = useRef()
+  const NameRef = useRef()
+  const EmailRef = useRef()
+  const PasswordRef= useRef()
 
-  function getName(inputref){
-    console.log(inputref)
-    
-  }
+
+ 
   function getEmail(){
     console.log(inputref.current.value)
   }
   function getPassword(){
+
+  }
+
+  function AuthenticateInputs(){
+    let name = NameRef.current.value
+    let email = EmailRef.current.value
+    let password = PasswordRef.current.value
+
+    console.log(name,email,password)
+
 
   }
 
@@ -29,15 +39,15 @@ function ContainerLeft() {
 
             <div className="inputtextcontainer" >
                 <p style={{fontSize:10,margin:0,textAlign:"initial"}}>Name</p>
-                <InputX inputref={inputref} placeholder="Name"></InputX>
+                <InputX inputref={NameRef} placeholder="Name"></InputX>
             </div>
             <div className="inputtextcontainer" >
                 <p style={{fontSize:10,margin:0,textAlign:"initial"}}>Email address</p>
-                <InputX placeholder="Email"></InputX>
+                <InputX inputref={EmailRef}placeholder="Email"></InputX>
             </div>
             <div className="inputtextcontainer" >
                 <p style={{fontSize:10,margin:0,textAlign:"initial"}}>Password</p>
-                <InputX placeholder="Password" type='password'></InputX>
+                <InputX inputref={PasswordRef}placeholder="Password" type='password'></InputX>
 
             </div>
             <div className="check">
@@ -47,7 +57,7 @@ function ContainerLeft() {
               <label>i agree to <a>Terms&condition</a></label>
             </div>
 
-            <Button text="sign in" onClick={getEmail}/>
+            <Button text="sign in" onClick={AuthenticateInputs}/>
             <span style={{
               fontSize:9+"px",
               marginTop:20+"px",
