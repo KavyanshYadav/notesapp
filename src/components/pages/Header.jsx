@@ -3,6 +3,7 @@ import InputX from '../miniComponents/InputX'
 import Button from '../miniComponents/Button'
 import { FaXTwitter } from 'react-icons/fa6'
 import "./Header.css"
+import { logout } from '../../services/firebase'
 
 function Header() {
 
@@ -17,7 +18,7 @@ function Header() {
         else{
             return "flex"
         }
-
+    
 
         
     }
@@ -31,6 +32,7 @@ function Header() {
         <InputX placeholder='Search' width="400px"/>
         </div>
         <div className="iconHolder">
+            <Button type="text" text="logout" IconComponent={FaXTwitter} onClick={()=>{location.reload();logout()}}/>
             <Button type="icon" IconComponent={FaXTwitter}/>
         <div className="name">
           
@@ -45,7 +47,7 @@ function Header() {
             </div>
         </div>
             <Button type="icon" IconComponent={FaXTwitter} onClick={()=>sethidden(!hidden)}/>
-        </div>
+            </div>
     </div>
   )
 }

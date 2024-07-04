@@ -3,6 +3,25 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
+import {
+  GoogleAuthProvider,
+  getAuth,
+  signInWithPopup,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
+  signOut,
+  onAuthStateChanged,
+} from "firebase/auth";
+import {
+  getFirestore,
+  query,
+  getDocs,
+  collection,
+  where,
+  addDoc,
+} from "firebase/firestore";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -19,3 +38,68 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+const db = getFirestore(app)
+const auth = getAuth(app)
+
+
+const googleProvider = new GoogleAuthProvider();
+
+const signInWithPopupGoogle = async ()=>{
+  try{
+    const res = await signInWithPopup(auth,googleProvider)
+    const user = res.user;
+    const q = query(collection(db,"users"),where("uid","==",user.uid))
+    const doc = await getDocs(q);
+    
+
+    if (doc.docs.length==0){
+      await addDoc(collection(db, "users"), {
+        uid: user.uid,
+        name: user.displayName,
+        authProvider: "google",
+        email: user.email
+    })
+  }
+
+
+  }
+  catch(err)
+{
+  console.error(err)
+}
+}
+
+const getNotes = async () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = onAuthStateChanged( auth, async (user) => {
+      try {
+        if (user) {
+          console.log(user)
+          const q = query(collection(db, `users/${user.uid}/notes`));
+          const querySnapshot = await getDocs(q);
+          const notes = querySnapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data()
+          }));
+          console.log(querySnapshot)
+          resolve(notes);
+        } else {
+          console.log("No user is currently signed in.");
+          resolve([1]); // Return an empty array if no user is signed in
+        }
+      } catch (error) {
+        console.error("Error fetching notes:", error);
+        reject(error); // Reject with error if any occurs
+      } finally {
+        unsubscribe(); // Unsubscribe from onAuthStateChanged
+      }
+    });
+  });
+};
+
+const logout=()=>{
+  signOut(auth)
+}
+
+
+export {signInWithPopupGoogle,auth,getNotes,logout}

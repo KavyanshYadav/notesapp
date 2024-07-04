@@ -6,6 +6,7 @@ import { FaBeer } from 'react-icons/fa'
 import { FcGoogle } from 'react-icons/fc'
 import { FaXTwitter } from 'react-icons/fa6'
 import { BiLogoReddit } from 'react-icons/bi'
+import { getNotes, signInWithPopupGoogle } from '../../services/firebase'
 
 function ContainerLeft() {
   const NameRef = useRef()
@@ -66,8 +67,8 @@ function ContainerLeft() {
             }} >--------OR----------</span>
 
             <div className="thirdpartysigninbox-">
-              <Button type="icon" IconComponent={FcGoogle}></Button>
-              <Button type="icon" IconComponent={FaXTwitter }></Button>
+              <Button type="icon" IconComponent={FcGoogle} onClick={signInWithPopupGoogle }></Button>
+              <Button type="icon" IconComponent={FaXTwitter } onClick={getNotes}></Button>
               {/* <Button type="icon" IconComponent={BiLogoReddit}></Button>
               <Button type="icon" IconComponent={FcGoogle}></Button> */}
               

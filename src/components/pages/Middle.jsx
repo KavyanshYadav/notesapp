@@ -1,18 +1,31 @@
-import React from 'react'
+import React, { useState ,useEffect} from 'react'
 import "./Middle.css"
 import NoteCard from '../MegaComponents/NoteCard'
 import { motion } from "framer-motion"
+import { getNotes } from '../../services/firebase'
 
 function Middle() {
+  const [notes,setnotes]=useState([1])
+    useEffect(() => {
+      async function name(){
+        const fetchedNotes = await getNotes();
+        setnotes(fetchedNotes);
+        console.log(fetchedNotes)
+      }
+      name()
+      
+     
 
-    let arr =[1,3,4,5,5,6,7,8,9]
-
+    }, [])
+    
+    const arr=[]
 
   return (
     <div className='MiddleC'>
         <h2>Your NoteCard</h2>
         <div className="noteslistC">
-        {arr.map((e)=>(<NoteCard/>))}
+          {notes && notes.length>0?(
+            notes.map((e)=>(<NoteCard/>))):(<p>not available</p>)}
 
         </div>
     </div>
