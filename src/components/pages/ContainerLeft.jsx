@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import InputX from '../miniComponents/InputX'
 import "./ContainerLeft.css"
 import Button from '../miniComponents/Button'
@@ -6,13 +6,14 @@ import { FaBeer } from 'react-icons/fa'
 import { FcGoogle } from 'react-icons/fc'
 import { FaXTwitter } from 'react-icons/fa6'
 import { BiLogoReddit } from 'react-icons/bi'
-import { getNotes, signInWithPopupGoogle } from '../../services/firebase'
+import { getNotes, signInWithPopupGoogle, XSignInWithEmail } from '../../services/firebase'
 
 function ContainerLeft() {
   const NameRef = useRef()
   const EmailRef = useRef()
   const PasswordRef= useRef()
 
+  const[invalid,setinvalid] = useState(false)
 
  
   function getEmail(){
@@ -28,7 +29,15 @@ function ContainerLeft() {
     let password = PasswordRef.current.value
 
     console.log(name,email,password)
+    async function getCorrect(){
+      const res = await XSignInWithEmail(email,password)
 
+      if (res.code=="auth/invalid-email")
+      {
+        setinvalid(true)
+      }
+    }
+    getCorrect()
 
   }
 
@@ -36,6 +45,8 @@ function ContainerLeft() {
     <div className='container'>
         <div className='logincontainer'>
             <h2>Get Started Now</h2>
+
+            {invalid ? <p style={{fontSize:"14px",margin:0,textAlign:"left",color:"red",textDecoration:"bold"}}>invalid email or pass</p>:<h4></h4>}
 
 
             <div className="inputtextcontainer" >

@@ -74,14 +74,16 @@ const getNotes = async () => {
     const unsubscribe = onAuthStateChanged( auth, async (user) => {
       try {
         if (user) {
-          console.log(user)
-          const q = query(collection(db, `users/${user.uid}/notes`));
+          
+          const id = await searchByUID(user.uid)
+
+          const q = query(collection(db, `users/${id}/notes`));
           const querySnapshot = await getDocs(q);
           const notes = querySnapshot.docs.map((doc) => ({
             id: doc.id,
             ...doc.data()
           }));
-          console.log(querySnapshot)
+          console.log(`users/${id}/notes`)
           resolve(notes);
         } else {
           console.log("No user is currently signed in.");
@@ -101,5 +103,36 @@ const logout=()=>{
   signOut(auth)
 }
 
+const searchByUID = async (uid) => {
+  const q = query(collection(db, "users"), where("uid", "==", uid));
+  const querySnapshot = await getDocs(q);
+  // querySnapshot.forEach((doc) => {
+  //   return(doc.id);
+  // });
+  return querySnapshot.docs[0].id
+};
 
-export {signInWithPopupGoogle,auth,getNotes,logout}
+
+const XSignInWithEmail = async(email,pass)=>{
+  try {
+    const name = await signInWithEmailAndPassword(auth, email, pass);
+    const user = name.user;
+    const q = query(collection(db,"users"),where("uid","==",name.user.uid))
+    const doc = await getDocs(q);
+    console.log(doc)
+    if (doc.docs.length==0){
+      await addDoc(collection(db, "users"), {
+        uid: user.uid,
+        name: user.displayName,
+        authProvider: "google",
+        email: user.email
+    })
+  }
+  } catch (err) {
+    console.error(err);
+    return(err)
+  }
+}
+
+
+export {signInWithPopupGoogle,auth,getNotes,logout,XSignInWithEmail}

@@ -17,6 +17,14 @@ function Middle() {
      
 
     }, [])
+
+    function CreateCard(){
+      return(
+        <div>
+
+        </div>
+      )
+    }
     
     const arr=[]
 
@@ -24,6 +32,9 @@ function Middle() {
     <div className='MiddleC'>
         <h2>Your NoteCard</h2>
         <div className="noteslistC">
+
+          <NoteCard type='create'/>
+
           {notes && notes.length>0?(
             notes.map((e)=>(<NoteCard/>))):(<p>not available</p>)}
 
